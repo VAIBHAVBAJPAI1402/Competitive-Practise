@@ -18,10 +18,10 @@ int main()
 	cin>>T;
 	while(T--)
 	{
-		string s1,s2;
-		cin>>s1;
+		char s1[100],s2[100];
+		scanf("%s",&s1);
 		int l1=strlen(s1);
-		cin>>s2;
+		scanf("%s",&s2);
 		int l2=strlen(s2);
 		int del=0;
 		for(int i=0;i<l1;i++)
