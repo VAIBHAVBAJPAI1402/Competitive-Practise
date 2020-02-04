@@ -12,9 +12,20 @@ bool validate_sudoku(char board[9][9])
 				continue;
 			
 			//generate unique strings row,col and 3x3 block
-			string row=board[i][j] + " rows " + i;
-			string col=board[i][j] + " col " + j;
-			string block=board[i][j] + " box " + (i/3) + " - " + (j/3);
+			string row="";
+			row+=board[i][j];
+			row+=" rows ";
+			row+=i;
+			string col="";
+			col=board[i][j];
+			col+=" col ";
+			col+=j;
+			string block="";
+			block+=board[i][j];
+			block+=" box ";
+			block+=(i/3);
+			block+=" - ";
+			block+=(j/3);
 			
 			if(records.find(row)!=records.end())
 				return false;
