@@ -16,6 +16,19 @@ void insert_Begin(Node** head,int val)
 	//set head to newnode
 	*head=newnode;
 }
+//insertion in after the given node where pointer to intermediate node is given
+void insert_Mid(Node* head, Node* mid, int val)
+{
+	if(head==NULL)
+	{
+		cout<<"No intermediate node! cant insert";
+		return;
+	}
+	Node* newnode=new Node();
+	newnode->data=val;
+	newnode->next=mid->next;
+	mid->next=newnode;
+}
 //insert data at the end
 void insert_End(Node** head,int val)
 {
@@ -49,6 +62,12 @@ int main()
 	insert_Begin(&head,4);
 	insert_Begin(&head,11);
 	insert_End(&head,1);
+	Node* tmp=head;
+	while(tmp->data!=4)
+	{
+		tmp=tmp->next;
+	}	
+	insert_Mid(head,tmp,55);
 	traverse(head);
 	return 0;
 }
