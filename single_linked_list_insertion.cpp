@@ -50,6 +50,7 @@ int main()
 	insert_Begin(&head,11);
 	insert_End(&head,1);
 	traverse(head);
+	return 0;
 }
 
 
