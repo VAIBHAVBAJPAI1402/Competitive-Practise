@@ -56,6 +56,24 @@ void traverse(Node* head)
 		head=head->next;
 	}
 }
+void delete_Begin(Node** head)
+{
+	//delete a node from the beginning
+	//just set head to next node of head
+	Node* tmp;
+	tmp=(*head)->next;
+	*head=tmp;
+}
+void delete_End(Node* head)
+{
+	//delete a node from the end
+	//just set next of second last node to NULL
+	while(head->next->next!=NULL)
+	{
+		head=head->next;
+	}
+	head->next=NULL;
+}
 int main()
 {
 	Node* head=NULL;
@@ -68,6 +86,14 @@ int main()
 		tmp=tmp->next;
 	}	
 	insert_Mid(head,tmp,55);
+	insert_Mid(head,tmp,12);
+	traverse(head);
+	
+	cout<<"Deleting nodes from beginning"<<endl;
+	delete_Begin(&head);
+	traverse(head);
+	cout<<"Deleting nodes from End"<<endl;
+	delete_End(head);
 	traverse(head);
 	return 0;
 }
