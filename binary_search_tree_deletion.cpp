@@ -1,4 +1,5 @@
 #include<iostream>
+using namespace std;
 struct Node
 {
 	int key;
@@ -32,14 +33,23 @@ Node* insert(Node* root, int key)
 	return root;
 	
 }
-
+Node* minValueNode(Node* root)
+{
+	Node* cur=root;
+	while(cur!=NULL && cur->left!=NULL)
+	{
+		cur=cur->left;
+	}
+	return cur;
+	
+}
 Node* deleteNode(Node* node,int key)
 {
 	//if node is null then return this node
 	if(node==NULL)
 		return node;
 		
-	//if node has only left child or no child at all then copy the contents of child node and delete child
+	//if 
 	if(key<node->key)
 	{
 		node->left=deleteNode(node->left,key);
@@ -50,10 +60,37 @@ Node* deleteNode(Node* node,int key)
 	}
 	else
 	{
-		//if key is equal to value at node
-		
+		//if key is equal to value at node and has one child or no
+		if(node->left==NULL)
+		{
+			Node* temp=node->right;
+			free(node);
+			return temp;
+		}
+		else if(node->right==NULL)
+		{
+			Node* temp=node->left;
+			free(node);
+			return temp;
+		}
+		//if node has both children then replace it with next inorder value
+		Node* temp=minValueNode(node->right);
+		//replace it with inorder successor
+		node->key=temp->key;
+		//delete the inorder successor
+		node->right=deleteNode(node->right,temp->key);
 	}
 	
+}
+
+void inorder(Node* root)
+{
+	if(root!=NULL)
+	{
+		inorder(root->left);
+		cout<<root->key<<"\t";
+		inorder(root->right);	
+	}
 }
 
 int main()
@@ -70,11 +107,12 @@ int main()
 	//printing the contents of binary tree
 	cout<<"Contents -\n";
 	inorder(root);
-	
+	cout<<endl;
 	//delete the node with key 20
 	root=deleteNode(root,20);
 	cout<<"Contents of modified tree -\n";
 	inorder(root);
-	
+	cout<<endl;
+	return 0;
 	
 }
